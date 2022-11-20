@@ -8,6 +8,9 @@ sudo ln -s /etc/sv/elogind /var/service
 # audio/music stuff
 sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio sof-firmware pamixer mpc mpd playerctl ncmpcpp 
 
+# screen utils 
+sudo xbps-install -S brightnessctl redshift scrot ueberzug autorandr dunst feh
+
  
 
  
