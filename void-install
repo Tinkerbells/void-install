@@ -1,3 +1,11 @@
 #!/bin/sh
 
-sudo xbps-install -S base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xf86-video-intel unclutter xclip 
+# base packages
+sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus elogind autoconf autoconf-archive pkg-config libbsd xkb-switch xdg-user-dirs gtk2-engines
+sudo ln -s /etc/sv/dbus /var/service
+sudo ln -s /etc/sv/elogind /var/service
+
+ 
+
+ 
+        Copie
