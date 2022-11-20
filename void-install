@@ -11,6 +11,9 @@ sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio
 # screen utils 
 sudo xbps-install -S brightnessctl redshift scrot ueberzug autorandr dunst feh
 
+# network
+sudo xbps-install -S NetworkManager openresolv wireguard-dkms wireguard-tools
+
  
 
  
