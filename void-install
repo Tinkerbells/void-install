@@ -18,7 +18,7 @@ sudo xbps-install -S NetworkManager openresolv wireguard-dkms wireguard-tools
 sudo xbps-install -S zip unzip unrar p7zip atool 
 
 # useful utils 
-sudo xbps-install -S curl wget bc ripgrep translate-shell keyd clipnotify clipmenu envycontrol fzf fd 
+sudo xbps-install -S curl wget bc ripgrep translate-shell keyd clipnotify clipmenu envycontrol fzf fd bat
 
 # programming languages/build systems
 sudo xbps-install -S rust go cmake ninja nodejs 
@@ -42,4 +42,3 @@ sudo ln -s /etc/sv/wireguard /var/service
  
 
  
-        Copie
