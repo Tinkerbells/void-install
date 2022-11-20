@@ -25,5 +25,10 @@ sudo xbps-install -S rust go cmake ninja nodejs
 # languages formatters/linters 
 sudo xbps-install -S shellcheck StyLua 
 
+# Necessary software 
+sudo xbps-install -S calibre telegram-desktop firefox chromium 
+
+ 
+
  
         Copie
