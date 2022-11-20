@@ -28,7 +28,9 @@ sudo xbps-install -S shellcheck StyLua
 # Necessary software 
 sudo xbps-install -S calibre telegram-desktop firefox chromium 
 
- 
+# minimal (suckless) software 
+sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass 
+
 
  
         Copie
