@@ -31,6 +31,11 @@ sudo xbps-install -S calibre telegram-desktop firefox chromium
 # minimal (suckless) software 
 sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass 
 
+# zsh setup 
+sudo xbps-install -S zsh zsh-completions
+curl -sS https://starship.rs/install.sh | sh
+
+ 
 
  
         Copie
