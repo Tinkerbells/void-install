@@ -5,6 +5,9 @@ sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel har
 sudo ln -s /etc/sv/dbus /var/service
 sudo ln -s /etc/sv/elogind /var/service
 
+# audio/music stuff
+sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio sof-firmware pamixer mpc mpd playerctl ncmpcpp 
+
  
 
  
