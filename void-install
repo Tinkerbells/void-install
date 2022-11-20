@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sudo xbps-install -S base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xf86-video-intel unclutter xclip 
