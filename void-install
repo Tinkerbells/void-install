@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # base packages
-sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus elogind autoconf autoconf-archive pkg-config libbsd xkb-switch xdg-user-dirs gtk2-engines sxhkd acpid polkit
+sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus elogind autoconf autoconf-archive pkg-config libbsd setxkbmap xkb-switch xdg-user-dirs gtk2-engines sxhkd acpid polkit
 
 # audio/music stuff
 sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio sof-firmware pamixer mpc mpd playerctl ncmpcpp 
