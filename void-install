@@ -48,11 +48,18 @@ sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass btop
 sudo xbps-install -S zsh zsh-completions
 curl -sS https://starship.rs/install.sh | sh
 
-git clone https://github.com/Yash-Handa/logo-ls.git "$HOME/repos"
+# install logo-ls
+LOGO_LS="$HOME/repos/logo-ls"
+git clone https://github.com/Yash-Handa/logo-ls.git "$LOGO_LS"
+cd "$LOGO_LS" && go mod tidy && go build
+sudo cp "$LOGO_LS/logo-ls" /usr/local/bin
+sudo cp "$LOGO_LS/logo-ls.1.gz" /usr/share/man/man1/
 
-cd "$HOME/repos/logo-ls" && go mod tidy && go build
-sudo cp "$HOME/repos/logo-ls/logo-ls" /usr/local/bin
-sudo cp "$HOME/repos/logo-ls/logo-ls/logo-ls.1.gz" /usr/share/man/man1/
+# install ueberzugpp
+UEBERZUGPP="$HOME/repos/ueberzugpp"
+git clone https://github.com/jstkdng/ueberzugpp.git "$UEBERZUGPP"
+cd "$UEBERZUGPP" || mkdir "$UEBERZUGPP/build"
+cd "$UEBERZUGPP/build" || cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
 mkdir -p "$HOME/.local/share/gnupg"
 mkdir -p "$HOME/.local/share/cargo"
