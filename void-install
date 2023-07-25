@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # base packages (Xorg and other)
-sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus elogind autoconf autoconf-archive pkg-config libbsd setxkbmap xkb-switch xdg-user-dirs gtk2-engines acpid polkit
+sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel imlib2-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus elogind autoconf autoconf-archive pkg-config libbsd setxkbmap xkb-switch xdg-user-dirs gtk2-engines acpid polkit
 
 # audio/music stuff
 sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio sof-firmware pamixer mpc mpd playerctl ncmpcpp
 
 # screen utils
-sudo xbps-install -S brightnessctl redshift scrot ueberzug autorandr dunst feh 
+sudo xbps-install -S brightnessctl redshift scrot ueberzug autorandr dunst feh
 
 # network
 sudo xbps-install -S NetworkManager openresolv wireguard-dkms wireguard-tools
@@ -16,7 +16,7 @@ sudo xbps-install -S NetworkManager openresolv wireguard-dkms wireguard-tools
 sudo xbps-install -S zip unzip unrar p7zip atool
 
 # useful utils
-sudo xbps-install -S curl wget bc ripgrep translate-shell keyd clipnotify clipmenu envycontrol fzf fd bat acpi stow sxhkd 
+sudo xbps-install -S curl wget bc ripgrep translate-shell keyd clipnotify clipmenu envycontrol fzf fd bat acpi stow sxhkd
 
 # programming languages/build systems
 sudo xbps-install -S rust go cmake ninja nodejs
@@ -24,7 +24,7 @@ sudo xbps-install -S rust go cmake ninja nodejs
 sudo xbps-install -S shellcheck StyLua
 
 # Necessary software
-sudo xbps-install -S calibre telegram-desktop firefox chromium
+sudo xbps-install -S calibre firefox chromium
 
 # minimal (suckless) software
 sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass btop
@@ -33,10 +33,15 @@ sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass btop
 sudo xbps-install -S zsh zsh-completions
 curl -sS https://starship.rs/install.sh | sh
 
+git clone https://github.com/Yash-Handa/logo-ls.git "$HOME/repos"
+
+cd "$HOME/repos/logo-ls" && go mod tidy && go build
+sudo cp "$HOME/repos/logo-ls/logo-ls" /usr/local/bin
+sudo cp "$HOME/repos/logo-ls/logo-ls/logo-ls.1.gz" /usr/share/man/man1/
+
 sudo rm -rf /var/service/dhcpcd
 sudo rm -rf /var/service/wpa_supplicant
 sudo ln -s /etc/sv/NetworkManager /var/service
 sudo ln -s /etc/sv/wireguard /var/service
 sudo ln -s /etc/sv/dbus /var/service
 sudo ln -s /etc/sv/elogind /var/service
-
