@@ -1,5 +1,20 @@
 #!/bin/sh
 
+export LC_ALL=en_US.UTF-8
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export PATH="$HOME/.cargo/bin":$PATH
+export PATH="$HOME/.local/share/go/bin":$PATH
+export PATH="$HOME/.local/share/npm/bin":$PATH
+export PATH="$HOME/.local/share/cargo/bin":$PATH
+
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export GOPATH="$XDG_DATA_HOME"/go
+
 # base packages (Xorg and other)
 sudo xbps-install -Su base-devel libX11-devel libXft-devel libXinerama-devel imlib2-devel harfbuzz-devel libXext-devel libXrender-devel libxcb-devel libXScrnSaver-devel freetype-devel fontconfig-devel gd-devel xorg-server libXrandr-devel xinit xrdb xrandr xauth xf86-video-intel xf86-input-libinput unclutter xclip xsel dbus autoconf autoconf-archive pkg-config libbsd setxkbmap xkb-switch xdg-user-dirs gtk2-engines acpid polkit
 
