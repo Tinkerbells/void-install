@@ -1,0 +1,30 @@
+#!/bin/sh
+
+echo "LANG=en_US.UTF-8" >>/etc/locale.conf
+echo "void" >>/etc/hostname
+
+xbps-reconfigure -f glibc-locales
+
+xbps-install -S NetworkManager elogind
+
+UEFI_UUID=$(blkid -s UUID -o value /dev/nvme0n1p1)
+ROOT_UUID=$(blkid -s UUID -o value /dev/mapper/cryptroot)
+
+cat <<EOF >/etc/fstab
+UUID=$ROOT_UUID / btrfs $BTRFS_OPTS,subvol=@ 0 1
+UUID=$UEFI_UUID /boot vfat defaults,noatime 0 2
+UUID=$ROOT_UUID /home btrfs $BTRFS_OPTS,subvol=@home 0 2
+UUID=$ROOT_UUID /.snapshots btrfs $BTRFS_OPTS,subvol=@snapshots 0 2
+tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0
+EOF
+
+xbps-install -Su void-repo-nonfree linux-firmware-amd grub-x86_64-efi
+
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Void Linux"
+grub-mkconfig -o /boot/grub/grub.cfg
+
+rm -rf /var/service/dhcpcd
+rm -rf /var/service/wpa_supplicant
+ln -s /etc/sv/NetworkManager /var/service
+ln -s /etc/sv/dbus /var/service
+ln -s /etc/sv/elogind /var/service
