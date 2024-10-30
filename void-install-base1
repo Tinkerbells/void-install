@@ -14,22 +14,22 @@ btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
 umount /mnt
 
-mkdir -p /mnt/home
-mkdir -p /mnt/.snapshots
-mkdir -p /mnt/boot
-mkdir -p /mnt/var/cache
 mount -o $BTRFS_OPTS,subvol=@ $DISK2 /mnt
+mkdir -p /mnt/home
 mount -o $BTRFS_OPTS,subvol=@home $DISK2 /mnt/home
+mkdir -p /mnt/.snapshots
 mount -o $BTRFS_OPTS,subvol=@snapshots $DISK2 /mnt/.snapshots
+mkdir -p /mnt/var/cache
 btrfs subvolume create /mnt/var/cache/xbps
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/srv
 
+mkdir -p /mnt/boot
 mount -o rw,noatime $DISK1 /mnt/boot
 
 REPO=https://repo-fi.voidlinux.org/current
 ARCH=x86_64
-XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt base-system btrfs-progs cryptsetup
+XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt base-system btrfs-progs
 
 for dir in dev proc sys run; do
   mount --rbind /$dir /mnt/$dir
