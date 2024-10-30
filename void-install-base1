@@ -1,0 +1,41 @@
+#!/bin/sh
+
+DISK1="/dev/nvme0n1p1"
+DISK1="/dev/nvme0n1p2"
+
+mkfs.vfat -nBOOT -F32 $DISK1
+mkfs.btrfs -f -L void $DISK2
+
+BTRFS_OPTS="noatime,compress=zstd"
+
+mount -o $BTRFS_OPTS $DISK2 /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@snapshots
+umount /mnt
+
+mkdir -p /mnt/home
+mkdir -p /mnt/.snapshots
+mkdir -p /mnt/boot
+mkdir -p /mnt/var/cache
+mount -o $BTRFS_OPTS,subvol=@ $DISK2 /mnt
+mount -o $BTRFS_OPTS,subvol=@home $DISK2 /mnt/home
+mount -o $BTRFS_OPTS,subvol=@snapshots $DISK2 /mnt/.snapshots
+btrfs subvolume create /mnt/var/cache/xbps
+btrfs subvolume create /mnt/var/tmp
+btrfs subvolume create /mnt/srv
+
+mount -o rw,noatime $DISK1 /mnt/boot
+
+REPO=https://repo-fi.voidlinux.org/current
+ARCH=x86_64
+XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt base-system btrfs-progs cryptsetup
+
+for dir in dev proc sys run; do
+  mount --rbind /$dir /mnt/$dir
+  mount --make-rslave /mnt/$dir
+done
+
+cp /etc/resolv.conf /mnt/etc/
+
+BTRFS_OPTS=$BTRFS_OPTS PS1='(chroot) # ' chroot /mnt/ /bin/bash
