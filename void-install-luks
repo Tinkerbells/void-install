@@ -1,3 +1,5 @@
+#!/bin/sh
+
 export BTRFS_OPT=rw,noatime,discard=async,compress-force=zstd,space_cache=v2,commit=120
 
 mount -o $BTRFS_OPT /dev/mapper/LinuxGroup-LinuxSystem /mnt
@@ -16,3 +18,7 @@ mkdir -p /mnt/var/cache
 btrfs subvolume create /mnt/var/cache/xbps
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/var/log
+
+for dir in sys dev proc; do mount --rbind /$dir /mnt/$dir; mount --make-rslave /mnt/$dir; done
+
+BTRFS_OPTS=$BTRFS_OPTS PS1='(chroot) # ' chroot /mnt/ /bin/bash
