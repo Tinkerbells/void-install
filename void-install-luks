@@ -1,0 +1,18 @@
+export BTRFS_OPT=rw,noatime,discard=async,compress-force=zstd,space_cache=v2,commit=120
+
+mount -o $BTRFS_OPT /dev/mapper/LinuxGroup-LinuxSystem /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@snapshots
+umount /mnt
+mount -o $BTRFS_OPT,subvol=@ /dev/mapper/LinuxGroup-LinuxSystem /mnt
+mkdir /mnt/home
+mkdir /mnt/.snapshots
+mount -o $BTRFS_OPT,subvol=@home /dev/mapper/LinuxGroup-LinuxSystem /mnt/home/
+mount -o $BTRFS_OPT,subvol=@snapshots /dev/mapper/LinuxGroup-LinuxSystem /mnt/.snapshots/
+mkdir -p /mnt/boot/efi
+mount -o rw,noatime /dev/nvme0n1p1 /mnt/boot/efi/
+mkdir -p /mnt/var/cache
+btrfs subvolume create /mnt/var/cache/xbps
+btrfs subvolume create /mnt/var/tmp
+btrfs subvolume create /mnt/var/log
