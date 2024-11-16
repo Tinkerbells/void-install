@@ -25,7 +25,7 @@ sudo xbps-install -S pipewire alsa-pipewire bluez libspa-bluetooth libpulseaudio
 sudo xbps-install -S brightnessctl redshift scrot ueberzug autorandr dunst feh
 
 # network
-sudo xbps-install -S openresolv wireguard-dkms wireguard-tools
+sudo xbps-install -S openresolv
 
 # archivers
 sudo xbps-install -S zip unzip unrar p7zip atool
@@ -42,30 +42,15 @@ sudo xbps-install -S shellcheck StyLua
 sudo xbps-install -S calibre firefox chromium
 
 # minimal (suckless) software
-sudo xbps-install -S poppler zathura zathura-pdf-mupdf lf sxiv lazygit pass btop
+sudo xbps-install -S poppler zathura zathura-pdf-mupdf yazi sxiv lazygit pass btop eza
 
 # zsh setup with starship prompt
 sudo xbps-install -S zsh zsh-completions
+
 curl -sS https://starship.rs/install.sh | sh
-
-# install logo-ls
-LOGO_LS="$HOME/repos/logo-ls"
-git clone https://github.com/Yash-Handa/logo-ls.git "$LOGO_LS"
-cd "$LOGO_LS" && go mod tidy && go build
-sudo cp "$LOGO_LS/logo-ls" /usr/local/bin
-sudo cp "$LOGO_LS/logo-ls.1.gz" /usr/share/man/man1/
-
-# install ueberzugpp
-UEBERZUGPP="$HOME/repos/ueberzugpp"
-git clone https://github.com/jstkdng/ueberzugpp.git "$UEBERZUGPP"
-cd "$UEBERZUGPP" || mkdir "$UEBERZUGPP/build"
-cd "$UEBERZUGPP/build" || cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
 mkdir -p "$HOME/.local/share/gnupg"
 mkdir -p "$HOME/.local/share/cargo"
 mkdir -p "$HOME/.local/share/go"
 mkdir -p "$HOME/.local/share/npm"
 mkdir -p "$HOME/.local/share/pass"
-
-sudo ln -s /etc/sv/wireguard /var/service
-sudo ln -s /etc/sv/dbus /var/service
